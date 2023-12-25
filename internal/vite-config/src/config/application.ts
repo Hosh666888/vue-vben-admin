@@ -8,6 +8,8 @@ import { createPlugins } from '../plugins';
 import { generateModifyVars } from '../utils/modifyVars';
 import { commonConfig } from './common';
 
+import { mars3dPlugin } from 'vite-plugin-mars3d';
+
 interface DefineOptions {
   overrides?: UserConfig;
   options?: {
@@ -55,6 +57,10 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
             find: /#\//,
             replacement: pathResolve('types') + '/',
           },
+          {
+            find: /\/@\//,
+            replacement: pathResolve('src') + '/',
+          },
         ],
       },
       define: defineData,
@@ -80,7 +86,7 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
           },
         },
       },
-      plugins,
+      plugins: [...plugins, mars3dPlugin({ useStatic: false })],
     };
 
     const mergedConfig = mergeConfig(commonConfig(mode), applicationConfig);

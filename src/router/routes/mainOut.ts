@@ -9,9 +9,9 @@ import type { AppRouteModule } from '@/router/types';
 // http:ip:port/main-out
 export const mainOutRoutes: AppRouteModule[] = [
   {
-    path: '/main-out',
+    path: '/s',
     name: 'MainOut',
-    component: () => import('@/views/demo/main-out/index.vue'),
+    component: () => import('/@/mars3d/components/mars-work/main-view.vue'),
     meta: {
       title: 'MainOut',
       ignoreAuth: true,

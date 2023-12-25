@@ -17,6 +17,47 @@ import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
 
 import App from './App.vue';
+import {
+  AutoComplete,
+  Button,
+  Card,
+  Cascader,
+  Checkbox,
+  Col,
+  Collapse,
+  DatePicker,
+  Divider,
+  Dropdown,
+  Empty,
+  Form,
+  Image,
+  Input,
+  InputNumber,
+  List,
+  Menu,
+  Modal,
+  PageHeader,
+  Pagination,
+  Popover,
+  Progress,
+  Radio,
+  Row,
+  Select,
+  Slider,
+  Space,
+  Spin,
+  Switch,
+  Table,
+  Tabs,
+  Tooltip,
+  Tree,
+  Typography,
+  Upload,
+} from 'ant-design-vue';
+
+
+import { injectState, key } from '@/mars3d/common/store/widget';
+import store from '@/mars3d/common/store/widget-store';
 
 async function bootstrap() {
   const app = createApp(App);
@@ -57,6 +98,46 @@ async function bootstrap() {
 
   // https://next.router.vuejs.org/api/#isready
   // await router.isReady();
+
+
+
+  app.use(AutoComplete);
+  app.use(Row);
+  app.use(Cascader);
+  app.use(Col);
+  app.use(Collapse);
+  app.use(Button);
+  app.use(Select);
+  app.use(List);
+  app.use(Form);
+  app.use(Input);
+  app.use(InputNumber);
+  app.use(DatePicker);
+  app.use(Dropdown);
+  app.use(Checkbox);
+  app.use(Radio);
+  app.use(Switch);
+  app.use(Space);
+  app.use(Slider);
+  app.use(Tree);
+  app.use(Upload);
+  app.use(Progress);
+  app.use(PageHeader);
+  app.use(Menu);
+  app.use(Popover);
+  app.use(Spin);
+  app.use(Modal);
+  app.use(Typography);
+  app.use(Tabs);
+  app.use(Tooltip);
+  app.use(Divider);
+  app.use(Card);
+  app.use(Image);
+  app.use(Pagination);
+  app.use(Table);
+  app.use(Empty);
+
+  app.use(injectState(store), key);
 
   app.mount('#app');
 }
