@@ -1,5 +1,6 @@
 import { getAllRoleList, isAccountExist } from '@/api/demo/system';
 import { BasicColumn, FormSchema } from '@/components/Table';
+import dayjs from "dayjs";
 
 /**
  * transform mock data
@@ -25,13 +26,13 @@ export const deptMap = (() => {
 
 export const columns: BasicColumn[] = [
   {
-    title: '用户名',
-    dataIndex: 'account',
+    title: '工号',
+    dataIndex: 'serialNum',
     width: 120,
   },
   {
-    title: '昵称',
-    dataIndex: 'nickname',
+    title: '姓名',
+    dataIndex: 'realName',
     width: 120,
   },
   {
@@ -43,6 +44,9 @@ export const columns: BasicColumn[] = [
     title: '创建时间',
     dataIndex: 'createTime',
     width: 180,
+    customRender: ({ value }) => {
+      return dayjs(value).format('YYYY-MM-DD');
+    },
   },
   {
     title: '角色',
@@ -51,10 +55,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '所属部门',
-    dataIndex: 'dept',
-    customRender: ({ value }) => {
-      return deptMap[value];
-    },
+    dataIndex: 'departmentName',
   },
   {
     title: '备注',
@@ -64,14 +65,14 @@ export const columns: BasicColumn[] = [
 
 export const searchFormSchema: FormSchema[] = [
   {
-    field: 'account',
-    label: '用户名',
+    field: 'serialNum',
+    label: '工号',
     component: 'Input',
     colProps: { span: 8 },
   },
   {
-    field: 'nickname',
-    label: '昵称',
+    field: 'realName',
+    label: '姓名',
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -79,36 +80,22 @@ export const searchFormSchema: FormSchema[] = [
 
 export const accountFormSchema: FormSchema[] = [
   {
-    field: 'account',
-    label: '用户名',
+    field: 'serialNum',
+    label: '工号',
     component: 'Input',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
+    // helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
     rules: [
       {
         required: true,
-        message: '请输入用户名',
-      },
-      {
-        trigger: 'blur',
-        validator(_, value) {
-          return new Promise((resolve, reject) => {
-            if (!value) return resolve();
-            isAccountExist(value)
-              .then(resolve)
-              .catch((err) => {
-                reject(err.message || '验证失败');
-              });
-          });
-        },
+        message: '请输入工号',
       },
     ],
   },
   {
-    field: 'pwd',
-    label: '密码',
-    component: 'InputPassword',
+    field: 'realName',
+    label: '姓名',
+    component: 'Input',
     required: true,
-    ifShow: false,
   },
   {
     label: '角色',
@@ -118,12 +105,13 @@ export const accountFormSchema: FormSchema[] = [
       api: getAllRoleList,
       labelField: 'roleName',
       valueField: 'roleValue',
+      mode: 'multiple',
     },
     required: true,
   },
   {
-    field: 'dept',
-    label: '所属部门',
+    field: 'departmentId',
+    label: '部门',
     component: 'TreeSelect',
     componentProps: {
       fieldNames: {
@@ -135,13 +123,6 @@ export const accountFormSchema: FormSchema[] = [
     },
     required: true,
   },
-  {
-    field: 'nickname',
-    label: '昵称',
-    component: 'Input',
-    required: true,
-  },
-
   {
     label: '邮箱',
     field: 'email',

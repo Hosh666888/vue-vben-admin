@@ -14,7 +14,7 @@ export const mainOutRoutes: AppRouteModule[] = [
     component: () => import('/@/mars3d/components/mars-work/main-view.vue'),
     meta: {
       title: 'MainOut',
-      ignoreAuth: true,
+      ignoreAuth: false,
     },
   },
 ];

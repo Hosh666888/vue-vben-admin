@@ -43,7 +43,7 @@
   });
   const initTree = async () => {
     // 构建树
-    const res = await axios.get('http://localhost/layers');
+    const res = await axios.get('http://localhost:8080/layers');
     const data: any[] = res.data;
     if (data) {
       for (const item of data) {
